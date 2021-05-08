@@ -4,8 +4,6 @@ from keras.models import model_from_json
 from keras.preprocessing import image
 import pygame
 from pygame import mixer
-import time
-  
 
 model = model_from_json(open("fer.json", "r").read())
 model.load_weights('fer.h5')
@@ -44,12 +42,27 @@ while True:
 
         cv2.putText(test_img, predicted_emotion, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
         print (predicted_emotion)
-        if predicted_emotion == ("Happy"):
+        if predicted_emotion == ("Sad"):
+                                 mixer.init()
+                                 mixer.music.load("1.mp3")
+                                 mixer.music.set_volume(0.3)
+                                 mixer.music.play()
+        elif predicted_emotion == ("Happy"):
+                                 mixer.init()
+                                 mixer.music.load("2.mp3")
+                                 mixer.music.set_volume(0.3)
+                                 mixer.music.play()
+        elif predicted_emotion == ("Angry"):
+                                 mixer.init()
+                                 mixer.music.load("3.mp3")
+                                 mixer.music.set_volume(0.3)
+                                 mixer.music.play()
+        elif predicted_emotion == ("Fear"):
                                  mixer.init()
                                  mixer.music.load("4.mp3")
                                  mixer.music.set_volume(0.3)
                                  mixer.music.play()
-
+                                 
     resized_img = cv2.resize(test_img, (1000, 700))
     cv2.imshow('Facial emotion analysis ',resized_img)
 
